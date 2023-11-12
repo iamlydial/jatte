@@ -163,8 +163,6 @@
   </div>
 </div>
 
-{% include 'chat/partials/chat_bubble.html' %} 
-{% endblock %} 
-{% block scripts%}
-<script src="{% static 'js/main.js' %}"></script>
+{% include 'chat/partials/chat_bubble.html' %} {% endblock %} {% block scripts%}
+<script src="{% static 'js/main.js' %}?{% now 'U' %}"></script>
 {% endblock %}
