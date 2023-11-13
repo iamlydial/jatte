@@ -37,7 +37,7 @@ function getCookie(name) {
   return cookieValue;
 }
 
-function joinChatRoom() {
+async function joinChatRoom() {
   console.log("joinChatRoom");
   chatName = chatNameElement.value;
   console.log("joined as ", chatName);
@@ -46,7 +46,7 @@ function joinChatRoom() {
   data.append("name", chatName);
   data.append("url", chatWindowUrl);
 
-  fetch(`/api/create-room/${chatRoomUuid}/`, {
+  await fetch(`/api/create-room/${chatRoomUuid}/`, {
     method: "POST",
     headers: {
       "X-CSRFToken": getCookie("csrftoken"),
@@ -54,19 +54,27 @@ function joinChatRoom() {
     body: data,
   })
     .then(function (res) {
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
-      }
       return res.json();
     })
     .then(function (data) {
       console.log("data", data);
-    })
-    .catch(function (error) {
-      console.error("Error:", error);
     });
-}
+  chatSocket = new WebSocket(
+    `ws://${window.location.host}/ws/${chatRoomUuid}/`
+  );
 
+  chatSocket.onmessage = function (e) {
+    console.log(message);
+  };
+
+  chatSocket.onopen = function (e) {
+    console.log("onopen - chat socket was open");
+  };
+
+  chatSocket.onclose = function (e) {
+    console.log("onclose - chat socket was closed");
+  };
+}
 
 //  event listeners
 
