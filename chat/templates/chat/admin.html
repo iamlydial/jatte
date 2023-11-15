@@ -20,4 +20,15 @@
     {% endfor %}
   </div>
 </div>
-{% endif%} {% endblock %}
+{% endif%}
+<hr class="my-6" />
+<div class="mt-8">
+  {% for room in rooms %}
+  <div
+    class="p-4 rounded-xl {% if room.status == 'waiting' %}bg-emerald-100{% elif room.status == 'active'%}bg-yellow-100{% else %}bg-gray-100{%endif%}"
+  >
+    test
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
