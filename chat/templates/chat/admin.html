@@ -23,9 +23,9 @@
       <p class="px-2">{{ user.get_role_display }}</p>
 
       <p class="px-2 text-right">
-        {% comment %} {% if perms.user.edit_user %}
-        <a href="{% url 'chat:edit_user' user.pk %}" class="underline">Edit</a>
-        {% endif %} {% endcomment %}
+        {% if perms.user.edit_user %}
+          <a href="{% url 'chat:edit_user' user.pk %}" class="underline">Edit</a>
+        {% endif %}
       </p>
     </div>
     {% endfor %}
