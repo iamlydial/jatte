@@ -9,5 +9,6 @@ urlpatterns = [
     path('chat-admin/add-user/', views.add_user, name='add_user'),
     path('chat-admin/users/<uuid:uuid>/', views.user_detail, name='user_detail'),
     path('chat-admin/users/<uuid:uuid>/edit/', views.user_edit, name='edit_user'),
-    path('chat-admin/<str:uuid>/', views.room, name='room'),   
+    path('chat-admin/<str:uuid>/', views.room, name='room'),  
+    path('chat-admin/<str:uuid>/delete/', views.delete_room, name='delete_room'),   
 ]
