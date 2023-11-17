@@ -5,6 +5,7 @@ from django.views.decorators.http import require_POST
 from django.shortcuts import render
 from account.models import User
 from .models import Room
+from account.forms import AddUserForm, EditUserForm
 
 @require_POST
 def create_room(request, uuid):
@@ -39,3 +40,11 @@ def room(request, uuid):
     return render(request, 'chat/room.html', {
         'room': room
     })
+
+@login_required # decorato restrict to authenticated user only
+def add_user(request): #function that accepts http request as argument 
+    form = AddUserForm() # creates an instance of add user form 
+
+    return render(request, 'chat/add_user.html', { # this renders the tempate chat/add_user.html 
+        'form':form # and passes dictionary containing form instance to the template 
+    }) # render function is used to render the html template and return http response 
